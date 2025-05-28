@@ -1,5 +1,3 @@
-// import type { HttpContext } from '@adonisjs/core/http'
-
 import Transaction from '#models/transaction'
 
 export default class TransactionsController {

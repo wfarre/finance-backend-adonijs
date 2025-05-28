@@ -8,11 +8,6 @@ import { BalanceFactory } from '#database/factories/balance_factory'
 export default class extends BaseSeeder {
   static environment: string[] = ['development']
   async run() {
-    // Write your database queries inside the run method
-
-    // categories.forEach(async (cat) => await BudgetFactory.create())
-    // await BudgetFactory.createMany(5)
-    // await PotFactory.createMany(5)
     await this.#createBudgets()
     await this.#createPots()
     await this.#createTransactions()
@@ -20,7 +15,7 @@ export default class extends BaseSeeder {
   }
   async #createBudgets() {
     let index = 0
-    await BudgetFactory.tap((row, { faker }) => {
+    await BudgetFactory.tap((row, {}) => {
       const budget = data.budgets[index]
       row.category = budget.category
       row.theme = budget.theme
@@ -31,7 +26,7 @@ export default class extends BaseSeeder {
 
   async #createTransactions() {
     let index = 0
-    await TransactionFactory.tap((row, { faker }) => {
+    await TransactionFactory.tap((row, {}) => {
       const transaction = data.transactions[index]
       row.name = transaction.name
       // row.avatar = transaction.avatar
@@ -45,7 +40,7 @@ export default class extends BaseSeeder {
 
   async #createPots() {
     let index = 0
-    await PotFactory.tap((row, { faker }) => {
+    await PotFactory.tap((row, {}) => {
       const pot = data.pots[index]
       row.name = pot.name
       row.target = pot.target
@@ -56,7 +51,7 @@ export default class extends BaseSeeder {
   }
 
   async #createBalance() {
-    await BalanceFactory.tap((row, { faker }) => {
+    await BalanceFactory.tap((row, {}) => {
       const balance = data.balance
       row.current = balance.current
       row.expenses = balance.expenses

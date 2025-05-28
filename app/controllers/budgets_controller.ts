@@ -1,6 +1,5 @@
 import Budget from '#models/budget'
 import { Exception } from '@adonisjs/core/exceptions'
-import { Result } from '@adonisjs/core/health'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class BudgetsController {
@@ -11,7 +10,7 @@ export default class BudgetsController {
     }
   }
 
-  async show({ params, request, response }: HttpContext) {
+  async show({ params }: HttpContext) {
     try {
       const budget = await Budget.findByOrFail('id', params.id)
       return { result: budget }
@@ -20,7 +19,7 @@ export default class BudgetsController {
     }
   }
 
-  async destroy({ params, request, response }: HttpContext) {
+  async destroy({ params, response }: HttpContext) {
     try {
       const budgetToDelete = await Budget.findByOrFail('id', params.id)
       await budgetToDelete.delete()
@@ -47,7 +46,7 @@ export default class BudgetsController {
 
   async store({ request, response }: HttpContext) {
     try {
-      const pot = await Budget.create(request.body())
+      await Budget.create(request.body())
 
       return response.status(200).send({ message: 'Pot created successbully' })
     } catch (err) {

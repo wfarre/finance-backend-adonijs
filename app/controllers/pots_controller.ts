@@ -8,7 +8,7 @@ export default class PotsController {
     return { results: allPots }
   }
 
-  async show({ params, request, response }: HttpContext) {
+  async show({ params, response }: HttpContext) {
     try {
       const pot = await Pot.findByOrFail('id', params.id)
 
@@ -24,7 +24,7 @@ export default class PotsController {
 
   async store({ request, response }: HttpContext) {
     try {
-      const pot = await Pot.create(request.body())
+      await Pot.create(request.body())
 
       return response.status(200).send({ message: 'Pot created successbully' })
     } catch (err) {
@@ -32,7 +32,7 @@ export default class PotsController {
     }
   }
 
-  async destroy({ request, response, params }: HttpContext) {
+  async destroy({ response, params }: HttpContext) {
     try {
       const potToDelete = await Pot.findByOrFail('id', params.id)
       await potToDelete.delete()
