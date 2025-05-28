@@ -1,5 +1,4 @@
 import 'reflect-metadata'
-import { VercelRequest, VercelResponse } from '@vercel/node'
 import { Ignitor } from '@adonisjs/core'
 import { fileURLToPath } from 'node:url'
 import { dirname } from 'node:path'
@@ -19,7 +18,7 @@ async function setupServer() {
   }
 }
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: any, res: any) {
   await setupServer()
   return server.handle(req, res)
 }
