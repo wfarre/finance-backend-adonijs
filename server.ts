@@ -1,13 +1,18 @@
 import 'reflect-metadata'
-import { Ignitor } from '@adonisjs/core/build/standalone'
-import { HttpServer } from '@adonisjs/http-server'
 import { VercelRequest, VercelResponse } from '@vercel/node'
+import { Ignitor } from '@adonisjs/core'
+import { fileURLToPath } from 'node:url'
+import { dirname } from 'node:path'
 
-let server: HttpServer
+let server: any
 
 async function setupServer() {
   if (!server) {
-    const ignitor = new Ignitor(__dirname)
+    const filename = fileURLToPath(import.meta.url)
+    const dirName = dirname(filename)
+    const dirNameUrl = new URL(dirName)
+    const ignitor = new Ignitor(dirNameUrl)
+
     const app = await ignitor.httpServer()
     await app.start()
     server = app
