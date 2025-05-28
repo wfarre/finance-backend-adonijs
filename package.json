@@ -12,7 +12,7 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "vercel-build": "node ace build --production"
+    "vercel-build": "node ace build"
   },
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
